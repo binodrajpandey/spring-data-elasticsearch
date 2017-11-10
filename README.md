@@ -6,3 +6,5 @@ Note: you have to match spring-boot-version, spring-data-elasticsearch version a
 2. modify your configuration file as per your reqirement. like uncomment cluster.name, port,node etc.
 3. Run bin/elasticsearch (bin\elasticsearch.bat for window)
 4. Build the project with mvn clean install (I've added integration test and should be passed during maven build)
+
+#ES operations
