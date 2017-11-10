@@ -26,3 +26,28 @@ http://localhost:9200/twitter/tweet/1  using post with body:
 http://localhost:9200/twitter/tweet/1: kimchy using get
 4. search document
 http://localhost:9200/twitter/tweet/_search?q=user: kimchy using get
+
+
+Table 2.1. Supported keywords inside method names, it will be helpful if you want customquery with spring-data-elasticsearch.
+
+Keyword	Sample	    Elasticsearch Query String
+findByNameAndPrice	{"bool" : {"must" : [ {"field" : {"name" : "?"}}, {"field" : {"price" : "?"}} ]}}
+findByNameOrPrice	{"bool" : {"should" : [ {"field" : {"name" : "?"}}, {"field" : {"price" : "?"}} ]}}
+findByName	{"bool" : {"must" : {"field" : {"name" : "?"}}}}
+findByNameNot	{"bool" : {"must_not" : {"field" : {"name" : "?"}}}}
+findByPriceBetween	{"bool" : {"must" : {"range" : {"price" : {"from" : ?,"to" : ?,"include_lower" : true,"include_upper" : true}}}}}
+findByPriceLessThan	{"bool" : {"must" : {"range" : {"price" : {"from" : null,"to" : ?,"include_lower" : true,"include_upper" : true}}}}}
+findByPriceGreaterThan	{"bool" : {"must" : {"range" : {"price" : {"from" : ?,"to" : null,"include_lower" : true,"include_upper" : true}}}}}
+findByPriceBefore	{"bool" : {"must" : {"range" : {"price" : {"from" : null,"to" : ?,"include_lower" : true,"include_upper" : true}}}}}
+findByPriceAfter	{"bool" : {"must" : {"range" : {"price" : {"from" : ?,"to" : null,"include_lower" : true,"include_upper" : true}}}}}
+findByNameLike	{"bool" : {"must" : {"field" : {"name" : {"query" : "?*","analyze_wildcard" : true}}}}}
+findByNameStartingWith	{"bool" : {"must" : {"field" : {"name" : {"query" : "?*","analyze_wildcard" : true}}}}}
+EndingWith	findByNameEndingWith	{"bool" : {"must" : {"field" : {"name" : {"query" : "*?","analyze_wildcard" : true}}}}}
+findByNameContaining	{"bool" : {"must" : {"field" : {"name" : {"query" : "*?*","analyze_wildcard" : true}}}}}
+findByNameIn(Collection<String>names)	{"bool" : {"must" : {"bool" : {"should" : [ {"field" : {"name" : "?"}}, {"field" : {"name" : "?"}} ]}}}}
+findByNameNotIn(Collection<String>names)	{"bool" : {"must_not" : {"bool" : {"should" : {"field" : {"name" : "?"}}}}}}
+findByStoreNear	Not Supported Yet !
+findByAvailableTrue	{"bool" : {"must" : {"field" : {"available" : true}}}}
+findByAvailableFalse	{"bool" : {"must" : {"field" : {"available" : false}}}}
+findByAvailableTrueOrderByNameDesc	{"sort" : [{ "name" : {"order" : "desc"} }],"bool" : {"must" : {"field" : {"available" : true}}}}
+
