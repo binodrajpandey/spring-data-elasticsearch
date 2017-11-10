@@ -9,9 +9,9 @@ Note: you have to match spring-boot-version, spring-data-elasticsearch version a
 
 # ES operations
 1. create index called twitter
-http://localhost:9200/twitter/tweet/ using post.
+http://localhost:9200/twitter/ using post.
 2. add document on twitter
-http://localhost:9200/twitter/tweet/_search?q=user: kimchy using post with body 
+http://localhost:9200/twitter/tweet/1 kimchy using post with body 
 {
 
     "tweet" : {
