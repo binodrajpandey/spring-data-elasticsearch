@@ -7,4 +7,25 @@ Note: you have to match spring-boot-version, spring-data-elasticsearch version a
 3. Run bin/elasticsearch (bin\elasticsearch.bat for window)
 4. Build the project with mvn clean install (I've added integration test and should be passed during maven build)
 
-#ES operations
+# ES operations
+1. create index called twitter
+http://localhost:9200/twitter/tweet/ using post.
+2. add document on twitter
+http://localhost:9200/twitter/tweet/_search?q=user: kimchy using post with body 
+{
+
+    "tweet" : {
+
+        "user" : "kimchy",
+
+        "post_date" : "2009-11-15T14:12:12",
+
+        "message" : "trying out Elastic Search"
+
+    }
+
+}
+3. get document
+http://localhost:9200/twitter/tweet/1: kimchy using get
+4. search document
+http://localhost:9200/twitter/tweet/_search?q=user: kimchy using get
